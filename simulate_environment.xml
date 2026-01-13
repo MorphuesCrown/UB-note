@@ -1,0 +1,38 @@
+<mujoco model="G1 Manipulation Scene">
+  <include file="brainco_on_g1.xml"/>
+
+  <statistic center="0.5 0 0.8" extent="0.8"/>
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="140" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="tex_floor" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="100" height="100"/>
+    <material name="mat_floor" texture="tex_floor" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <texture type="2d" name="wood" builtin="flat" rgb1="0.6 0.4 0.2" width="512" height="512"/>
+    <material name="table_mat" texture="wood"/>
+  </asset>
+
+  <worldbody>
+    <geom name="scene_floor" size="0 0 0.05" type="plane" material="mat_floor" condim="3"/>
+
+    <light pos="1 0 3" dir="0 0 -1" directional="true" castshadow="true"/>
+
+    <body name="table" pos="0.6 0 0.8">
+       <geom type="box" size="0.3 0.4 0.02" material="table_mat" friction="1 0.005 0.0001"/>
+       
+       <geom type="cylinder" size="0.04 0.39" pos="0 0 -0.41" rgba="0.3 0.3 0.3 1"/>
+    </body>
+
+    <body name="cup" pos="0.5 0.1 0.9">
+       <freejoint/>
+       
+       <geom name="cup_geom" type="cylinder" size="0.03 0.06" rgba="0 0.8 1 0.8" 
+             mass="0.2" friction="1 0.005 0.0001" condim="3"/>
+    </body>
+
+  </worldbody>
+</mujoco>

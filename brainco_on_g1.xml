@@ -2,11 +2,16 @@
   <compiler angle="radian" meshdir="meshes"/>
   <!-- Default class for left hand -->
   <default>
+    <default class="g1_body">
+        <joint damping="5.0" armature="0.1" frictionloss="0.1"/>
+        <geom friction="1 0.005 0.0001"/>
+    </default>
+
     <default class="lefthand">
-      <joint damping="0.5" armature="0.01" frictionloss="0.1"/>
-      <default class="visual_hand">
-        <geom group="1" type="mesh" contype="0" conaffinity="0" density="0"/>
-      </default>
+        <joint damping="0.5" armature="0.01" frictionloss="0.1"/>
+        <default class="visual_hand">
+          <geom group="1" type="mesh" contype="0" conaffinity="0" density="0"/>
+        </default>
     </default>
   </default>
 
@@ -83,7 +88,8 @@
   </asset>
 
   <worldbody>
-    <body name="pelvis" pos="0 0 0.793">
+    <!-- <body name="pelvis" pos="0 0 0.793"> -->
+    <body name="pelvis" pos="0 0 0.793" childclass="g1_body">
       <inertial pos="0 0 -0.07605" quat="1 0 -0.000399148 0" mass="3.813" diaginertia="0.010549 0.0093089 0.0079184"/>
       <!-- <joint name="floating_base_joint" type="free" limited="false" actuatorfrclimited="false"/> -->
       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1" mesh="pelvis"/>
@@ -381,23 +387,40 @@
     <motor name="right_knee_joint" joint="right_knee_joint"/>
     <motor name="right_ankle_pitch_joint" joint="right_ankle_pitch_joint"/>
     <motor name="right_ankle_roll_joint" joint="right_ankle_roll_joint"/>
-    <motor name="waist_yaw_joint" joint="waist_yaw_joint"/>
-    <motor name="waist_roll_joint" joint="waist_roll_joint"/>
-    <motor name="waist_pitch_joint" joint="waist_pitch_joint"/>
-    <motor name="left_shoulder_pitch_joint" joint="left_shoulder_pitch_joint"/>
-    <motor name="left_shoulder_roll_joint" joint="left_shoulder_roll_joint"/>
-    <motor name="left_shoulder_yaw_joint" joint="left_shoulder_yaw_joint"/>
-    <motor name="left_elbow_joint" joint="left_elbow_joint"/>
-    <motor name="left_wrist_roll_joint" joint="left_wrist_roll_joint"/>
-    <motor name="left_wrist_pitch_joint" joint="left_wrist_pitch_joint"/>
-    <motor name="left_wrist_yaw_joint" joint="left_wrist_yaw_joint"/>
-    <motor name="right_shoulder_pitch_joint" joint="right_shoulder_pitch_joint"/>
-    <motor name="right_shoulder_roll_joint" joint="right_shoulder_roll_joint"/>
-    <motor name="right_shoulder_yaw_joint" joint="right_shoulder_yaw_joint"/>
-    <motor name="right_elbow_joint" joint="right_elbow_joint"/>
-    <motor name="right_wrist_roll_joint" joint="right_wrist_roll_joint"/>
-    <motor name="right_wrist_pitch_joint" joint="right_wrist_pitch_joint"/>
-    <motor name="right_wrist_yaw_joint" joint="right_wrist_yaw_joint"/>
+    <!-- <motor name="waist_yaw_joint" joint="waist_yaw_joint"/> -->
+    <!-- <motor name="waist_roll_joint" joint="waist_roll_joint"/> -->
+    <!-- <motor name="waist_pitch_joint" joint="waist_pitch_joint"/> -->
+    <position name="waist_yaw_joint" joint="waist_yaw_joint" kp="500" kv="50"/>
+    <position name="waist_roll_joint" joint="waist_roll_joint" kp="500" kv="50"/>
+    <position name="waist_pitch_joint" joint="waist_pitch_joint" kp="600" kv="60" ctrlrange="-1 1"/>
+    <!-- <motor name="left_shoulder_pitch_joint" joint="left_shoulder_pitch_joint"/> -->
+    <!-- <motor name="left_shoulder_roll_joint" joint="left_shoulder_roll_joint"/> -->
+    <!-- <motor name="left_shoulder_yaw_joint" joint="left_shoulder_yaw_joint"/> -->
+    <!-- <motor name="left_elbow_joint" joint="left_elbow_joint"/> -->
+    <!-- <motor name="left_wrist_roll_joint" joint="left_wrist_roll_joint"/> -->
+    <!-- <motor name="left_wrist_pitch_joint" joint="left_wrist_pitch_joint"/> -->
+    <!-- <motor name="left_wrist_yaw_joint" joint="left_wrist_yaw_joint"/> -->
+    <position name="left_shoulder_pitch_joint" joint="left_shoulder_pitch_joint" kp="500" kv="50"/>
+    <position name="left_shoulder_roll_joint"  joint="left_shoulder_roll_joint"  kp="500" kv="50"/>
+    <position name="left_shoulder_yaw_joint"   joint="left_shoulder_yaw_joint"   kp="400" kv="40"/>
+    <position name="left_elbow_joint"          joint="left_elbow_joint"          kp="400" kv="40"/>
+    <position name="left_wrist_roll_joint"     joint="left_wrist_roll_joint"     kp="200" kv="30"/>
+    <position name="left_wrist_pitch_joint"    joint="left_wrist_pitch_joint"    kp="200" kv="30"/>
+    <position name="left_wrist_yaw_joint"      joint="left_wrist_yaw_joint"      kp="200" kv="30"/>
+    <!-- <motor name="right_shoulder_pitch_joint" joint="right_shoulder_pitch_joint"/> -->
+    <!-- <motor name="right_shoulder_roll_joint" joint="right_shoulder_roll_joint"/> -->
+    <!-- <motor name="right_shoulder_yaw_joint" joint="right_shoulder_yaw_joint"/> -->
+    <!-- <motor name="right_elbow_joint" joint="right_elbow_joint"/> -->
+    <!-- <motor name="right_wrist_roll_joint" joint="right_wrist_roll_joint"/> -->
+    <!-- <motor name="right_wrist_pitch_joint" joint="right_wrist_pitch_joint"/> -->
+    <!-- <motor name="right_wrist_yaw_joint" joint="right_wrist_yaw_joint"/> -->
+    <position name="right_shoulder_pitch_joint" joint="right_shoulder_pitch_joint" kp="300" kv="30"/>
+    <position name="right_shoulder_roll_joint"  joint="right_shoulder_roll_joint"  kp="300" kv="30"/>
+    <position name="right_shoulder_yaw_joint"   joint="right_shoulder_yaw_joint"   kp="200" kv="20"/>
+    <position name="right_elbow_joint"          joint="right_elbow_joint"          kp="250" kv="25"/>
+    <position name="right_wrist_roll_joint"     joint="right_wrist_roll_joint"     kp="100" kv="10"/>
+    <position name="right_wrist_pitch_joint"    joint="right_wrist_pitch_joint"    kp="100" kv="10"/>
+    <position name="right_wrist_yaw_joint"      joint="right_wrist_yaw_joint"      kp="100" kv="10"/>
 
     <!-- Left Hand -->
     <position name="left_thumb_metacarpal_joint" joint="left_thumb_metacarpal_joint" kp="30" kv="10" ctrlrange="0 1.51"/>
@@ -427,7 +450,7 @@
 
 
   <!-- setup scene -->
-  <statistic center="1.0 0.7 1.0" extent="0.8"/>
+  <!-- <statistic center="1.0 0.7 1.0" extent="0.8"/>
   <visual>
     <headlight diffuse="0.6 0.6 0.6" ambient="0.1 0.1 0.1" specular="0.9 0.9 0.9"/>
     <rgba haze="0.15 0.25 0.35 1"/>
@@ -441,5 +464,5 @@
   <worldbody>
     <light pos="1 0 3.5" dir="0 0 -1" directional="true"/>
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
-  </worldbody>
+  </worldbody> -->
 </mujoco>
